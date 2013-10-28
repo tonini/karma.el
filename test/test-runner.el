@@ -12,6 +12,7 @@
 
 (require 'karma)
 
+(load (expand-file-name "test-helper.el" karma-test-path) nil t)
 (dolist (test-file (or argv (directory-files karma-test-path t "-tests.el$")))
   (load test-file nil t))
 

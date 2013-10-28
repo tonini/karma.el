@@ -49,9 +49,19 @@
 (defvar karma-run-buffer-name "*karma run*"
   "Name of the karma run output buffer.")
 
-(defvar karma--javascript-project-root-indicator
-  "package.json"
+(defvar karma--project-root-indicators
+  '("package.json" "bower.json")
   "List of files which indicates a javascript project root.")
+
+(defun karma-project-root ()
+  (let ((file (file-name-as-directory (expand-file-name default-directory))))
+    (karma--project-root-identifier file karma--project-root-indicators)))
+
+(defun karma--project-root-identifier (file indicators)
+  (let ((root-dir (if indicators (locate-dominating-file file (car indicators)) nil)))
+    (cond (root-dir (directory-file-name (expand-file-name root-dir)))
+          (indicators (karma--project-root-identifier file (cdr indicators)))
+          (t nil))))
 
 (provide 'karma)
 

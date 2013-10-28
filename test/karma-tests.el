@@ -35,9 +35,22 @@
 ;;; Code:
 
 (require 'ert)
+(require 'test-helper)
 
-(ert-deftest test-project-root-identifier ()
-  (should (equal (+ 1 1) 2)))
+(ert-deftest test-karma-project-root/npm-file-exists ()
+  (with-sandbox
+   (f-touch "package.json")
+   (should (equal (karma-project-root) karma-sandbox-path))))
+
+(ert-deftest test-karma-project-root/npm-file-dont-exists ()
+  (with-sandbox
+   (f-touch "Rakefile")
+   (should (equal (karma-project-root) nil))))
+
+(ert-deftest test-karma-project-root/bower-file-exists ()
+  (with-sandbox
+   (f-touch "bower.json")
+   (should (equal (karma-project-root) karma-sandbox-path))))
 
 (provide 'karma-tests)
 
