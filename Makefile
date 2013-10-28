@@ -1,12 +1,19 @@
-EMACS=emacs
+EMACS = emacs
+EMACSFLAGS =
+CASK = cask
+VERSION = `$(CASK) exec $(EMACS) --version | head -1`
 
-.PHONY: show-version test
+NO_COLOR=\033[0m
+INFO_COLOR=\033[1;32m
+STAT_COLOR=\033[1;33m
 
-show-version:
-	@ echo "### Emacs Information ###"
-	@ echo "PATH = `which ${EMACS}`"
-	${EMACS} --version
+.PHONY: info test
 
-test: show-version
-	@ echo "### elixir-mix test suite ###"
-	${EMACS} -batch -Q -l test/test-runner.el
+info:
+	@ echo "\n$(INFO_COLOR)Installed Emacs info: $(NO_COLOR)\n"
+	@ echo "  $(STAT_COLOR)[PATH]$(NO_COLOR)    = `which ${EMACS}`"
+	@ echo "  $(STAT_COLOR)[VERSION]$(NO_COLOR) = ${VERSION}"
+
+test: info
+	@ echo "\n$(INFO_COLOR)Run tests: $(NO_COLOR)\n"
+	$(CASK) exec $(EMACS) -batch -Q -l test/test-runner.el

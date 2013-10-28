@@ -36,6 +36,8 @@
 
 (require 'ert)
 
+(ert-deftest test-project-root-identifier ()
+  (should (equal (+ 1 1) 2)))
 
 (provide 'karma-tests)
 
