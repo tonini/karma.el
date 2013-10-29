@@ -39,17 +39,43 @@
 
 (ert-deftest test-karma-project-root/npm-file-exists ()
   (within-sandbox "lib/npm"
-   (f-touch "../../package.json")
-   (should (equal (karma-project-root) karma-sandbox-path))))
+    (f-touch "../../package.json")
+    (should (equal (karma-project-root) karma-sandbox-path))))
 
 (ert-deftest test-karma-project-root/bower-file-exists ()
-  (within-sandbox "lib/bower"
-   (f-touch "../../bower.json")
-   (should (equal (karma-project-root) karma-sandbox-path))))
+  (within-sandbox "lib"
+    (f-touch "../bower.json")
+    (should (equal (karma-project-root) karma-sandbox-path))))
 
 (ert-deftest test-karma-project-root/npm-file-dont-exists ()
   (within-sandbox
    (should (equal (karma-project-root) nil))))
+
+(ert-deftest test-flatten-of-list ()
+  (should (equal (karma-flatten '(1 2 (3 4) 5))
+                 '(1 2 3 4 5)))
+  (should (equal (karma-flatten '(1 2 ("dude" "hero" (3)) 4 5))
+                 '(1 2 "dude" "hero" 3 4 5))))
+
+(ert-deftest test-establish-root-directory/set-default-directory ()
+  (within-sandbox "lib/bower"
+    (f-touch "../../bower.json")
+    (should (equal (karma-establish-root-directory)
+                   default-directory))))
+
+(ert-deftest test-establish-root-directory/no-root-exists ()
+  (within-sandbox
+   (should-error (karma-establish-root-directory))))
+
+(ert-deftest test-build-compile-cmdlist ()
+  (should (equal (karma-build-compile-cmdlist "start")
+                 '("karma" "start")))
+  (should (equal (karma-build-compile-cmdlist '("run"))
+                 '("karma" "run")))
+  (should (equal (karma-build-compile-cmdlist "start --help")
+                 '("karma" "start" "--help")))
+  (should (equal (karma-build-compile-cmdlist '("run" ""))
+                 '("karma" "run"))))
 
 (provide 'karma-tests)
 
