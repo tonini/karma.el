@@ -43,6 +43,9 @@
   :type 'string
   :group 'karma)
 
+(defvar karma-config-file ".karma"
+  "The file which contains the path to the karma conf file.")
+
 (defvar karma-start-buffer-name "*karma start*"
   "Name of the karma server output buffer.")
 
@@ -105,7 +108,7 @@
                            (lambda (b) karma--compilation-buffer-name)))))
 
 (defun karma-config-path-to-file ()
-  (let ((file (format "%s/%s" (karma-project-root) ".karma")))
+  (let ((file (format "%s/%s" (karma-project-root) karma-config-file)))
     (if (not (file-exists-p file))
         (error "Couldn't find any karma config file."))
     (with-temp-buffer
