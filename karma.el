@@ -102,7 +102,8 @@
   (save-some-buffers (not compilation-ask-about-save)
                      (when (boundp 'compilation-save-buffers-predicate)
                        compilation-save-buffers-predicate))
-  (let* ((karma--compilation-buffer-name name))
+  (let* ((karma--compilation-buffer-name name)
+         (compilation-scroll-output t))
     (with-current-buffer
         (compilation-start (format "%s" cmdlist) 'karma-compilation-mode
                            (lambda (b) karma--compilation-buffer-name)))))
