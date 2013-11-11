@@ -116,6 +116,11 @@
       (insert-file-contents file)
       (expand-file-name (buffer-string)))))
 
+(defun karma-start ()
+  (interactive)
+  (karma-execute (list "start" (karma-config-path-to-file))
+                 karma-start-buffer-name))
+
 (defun karma-start-with-prompt (args)
   (interactive "Mkarma start: ")
   (karma-execute (list "start" args) karma-start-buffer-name))
@@ -125,18 +130,18 @@
   (karma-execute (list "start" (karma-config-path-to-file) "--single-run")
                  karma-start-buffer-name))
 
-(defun karma-start ()
+(defun karma-start-no-single-run ()
   (interactive)
-  (karma-execute (list "start" (karma-config-path-to-file))
+  (karma-execute (list "start" (karma-config-path-to-file) "--no-single-run")
                  karma-start-buffer-name))
-
-(defun karma-run-with-prompt (args)
-  (interactive "Mkarma run: ")
-  (karma-execute (list "run" args) karma-run-buffer-name))
 
 (defun karma-run ()
   (interactive)
   (karma-execute (list "run") karma-run-buffer-name))
+
+(defun karma-run-with-prompt (args)
+  (interactive "Mkarma run: ")
+  (karma-execute (list "run" args) karma-run-buffer-name))
 
 (defun karma-execute (cmdlist &optional buffer-name)
   "Run a karma command with CMDLIST as arguments."
