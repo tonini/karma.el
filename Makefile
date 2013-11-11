@@ -17,7 +17,7 @@ info:
 	@ echo "  $(STAT_COLOR)[PATH]$(NO_COLOR)    = `which $(EMACS)`"
 	@ echo "  $(STAT_COLOR)[VERSION]$(NO_COLOR) = $(VERSION)"
 
-build: cask compile test-elc test
+build: cask test-elc test
 
 test:
 	@ echo "\n$(INFO_COLOR)Run tests: $(NO_COLOR)\n"
