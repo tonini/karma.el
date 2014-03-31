@@ -39,13 +39,13 @@
 
 (ert-deftest test-karma-project-root/npm-file-exists ()
   (within-sandbox "lib/npm"
-    (f-touch "../../package.json")
-    (should (equal (karma-project-root) karma-sandbox-path))))
+                  (f-touch "../../package.json")
+                  (should (equal (karma-project-root) karma-sandbox-path))))
 
 (ert-deftest test-karma-project-root/bower-file-exists ()
   (within-sandbox "lib"
-    (f-touch "../bower.json")
-    (should (equal (karma-project-root) karma-sandbox-path))))
+                  (f-touch "../bower.json")
+                  (should (equal (karma-project-root) karma-sandbox-path))))
 
 (ert-deftest test-karma-project-root/npm-file-dont-exists ()
   (within-sandbox
@@ -59,9 +59,9 @@
 
 (ert-deftest test-establish-root-directory/set-default-directory ()
   (within-sandbox "lib/bower"
-    (f-touch "../../bower.json")
-    (should (equal (karma-establish-root-directory)
-                   default-directory))))
+                  (f-touch "../../bower.json")
+                  (should (equal (karma-establish-root-directory)
+                                 default-directory))))
 
 (ert-deftest test-establish-root-directory/no-root-exists ()
   (within-sandbox
