@@ -114,7 +114,7 @@
         (error "Couldn't find any karma config file."))
     (with-temp-buffer
       (insert-file-contents file)
-      (expand-file-name (buffer-string)))))
+      (expand-file-name (buffer-string) (karma-project-root)))))
 
 (defun karma-start ()
   (interactive)
