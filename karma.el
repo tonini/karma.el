@@ -59,6 +59,10 @@
                           (buffer-string)))))
     karma-config))
 
+(defun karma-mode-hook ()
+  "Hook which enables `karma-mode'"
+  (karma-mode 1))
+
 (defvar karma-start-buffer-name "*karma start*"
   "Name of the karma server output buffer.")
 
@@ -196,6 +200,9 @@ Key bindings:
   " karma"
   :group 'karma
   :global nil)
+
+(add-hook 'js-mode-hook 'karma-mode-hook)
+(add-hook 'js2-mode-hook 'karma-mode-hook)
 
 (provide 'karma)
 
