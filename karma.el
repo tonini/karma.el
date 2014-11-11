@@ -227,6 +227,25 @@ Argument BUFFER-NAME for the compilation."
   "The keymap used when `karma-mode' is active.")
 
 ;;;###autoload
+(defun karma-version (&optional show-version)
+  "Get the Karma version as string.
+
+If called interactively or if SHOW-VERSION is non-nil, show the
+version in the echo area and the messages buffer.
+
+The returned string includes both, the version from package.el
+and the library version, if both a present and different.
+
+If the version number could not be determined, signal an error,
+if called interactively, or if SHOW-VERSION is non-nil, otherwise
+just return nil."
+  (interactive (list t))
+  (let ((version (pkg-info-version-info 'karma)))
+    (when show-version
+      (message "Karma version: %s" version))
+    version))
+
+;;;###autoload
 (define-minor-mode karma-mode
   "Toggle karma mode.
 
