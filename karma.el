@@ -186,12 +186,19 @@ Argument BUFFER-NAME for the compilation."
                            buffer-name)
     (cd old-directory)))
 
+(defun karma-pop-to-start-buffer ()
+  (interactive)
+  (let ((buffer (get-buffer karma-start-buffer-name)))
+    (when buffer
+      (pop-to-buffer buffer))))
+
 (defvar karma-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-c , t") 'karma-start)
     (define-key map (kbd "C-c , s s") 'karma-start-single-run)
     (define-key map (kbd "C-c , s n") 'karma-start-no-single-run)
     (define-key map (kbd "C-c , r") 'karma-start-run)
+    (define-key map (kbd "C-c , p") 'karma-pop-to-start-buffer)
     map)
   "The keymap used when `karma-mode' is active.")
 
