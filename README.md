@@ -14,6 +14,33 @@ Karma Test Runner Emacs Integration
 (require 'karma)
 ```
 
+## Usage
+
+### Basic setup
+
+You need to create an `.karma` file inside your project directory to inform
+Karma.el where to get the Karma config file and the Karma executable.
+
+```json
+{
+  "config-file": "karma.coffee",
+  "karma-command": "node_modules/karma/bin/karma"
+}
+```
+
+The `config-file` and the `karma-command` paths need to be relative or absoulte
+to the your project directory.
+
+### Interactive Commands
+
+Keybinding           | Description
+---------------------|---------------
+<kbd>C-c , t</kbd>   | Runs `karma-start` in the root directory of the project.
+<kbd>C-c , s s</kbd> | Runs `karma-start-single-run` in the root directory of the project.
+<kbd>C-c , n s</kbd> | Runs `karma-start-no-single-run` in the root directory of the project.
+<kbd>C-c , r</kbd>   | Runs `karma-start-run` in the root directory of the project.
+<kbd>C-c , p</kbd>   | Pop to the `*Karma start*` buffer if exists.
+
 ## Contributing
 
 Contributions are very welcome!

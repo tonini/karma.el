@@ -196,7 +196,7 @@ Argument BUFFER-NAME for the compilation."
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-c , t") 'karma-start)
     (define-key map (kbd "C-c , s s") 'karma-start-single-run)
-    (define-key map (kbd "C-c , s n") 'karma-start-no-single-run)
+    (define-key map (kbd "C-c , n s") 'karma-start-no-single-run)
     (define-key map (kbd "C-c , r") 'karma-start-run)
     (define-key map (kbd "C-c , p") 'karma-pop-to-start-buffer)
     map)
