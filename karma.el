@@ -189,6 +189,15 @@ Argument BUFFER-NAME for the compilation."
                            buffer-name)
     (cd old-directory)))
 
+(defvar karma-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-c , t") 'karma-start)
+    (define-key map (kbd "C-c , s s") 'karma-start-single-run)
+    (define-key map (kbd "C-c , s n") 'karma-start-no-single-run)
+    (define-key map (kbd "C-c , r") 'karma-start-run)
+    map)
+  "The keymap used when `karma-mode' is active.")
+
 ;;;###autoload
 (define-minor-mode karma-mode
   "Toggle karma mode.
@@ -199,7 +208,8 @@ Key bindings:
   ;; The indicator for the mode line.
   " karma"
   :group 'karma
-  :global nil)
+  :global nil
+  :keymap 'karma-mode-map)
 
 (add-hook 'js-mode-hook 'karma-mode-hook)
 (add-hook 'js2-mode-hook 'karma-mode-hook)
