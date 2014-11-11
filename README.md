@@ -3,7 +3,7 @@
 
 # karma.el
 
-Karma Test Runner Emacs Integration
+> Karma Test Runner Emacs Integration
 
 ## Installation
 
