@@ -36,16 +36,28 @@
 
 (require 'compile)
 (require 'ansi-color)
-
-(defcustom karma-command "karma"
-  "The shell command for karma."
-  :type 'string
-  :group 'karma)
+(require 'json)
 
 (defcustom karma-config-file ".karma"
-  "The file which contains the path to the karma conf file."
+  ""
   :type 'string
   :group 'karma)
+
+(defun karma-command ()
+  "Return the shell command for karma from the .karma config file"
+  (expand-file-name (gethash "karma-command" (karma-project-config)) (karma-project-root)))
+
+(defun karma-config-file-path ()
+  "Return the path to the karma config file"
+  (expand-file-name (gethash "config-file" (karma-project-config)) (karma-project-root)))
+
+(defun karma-project-config ()
+  (let* ((json-object-type 'hash-table)
+         (karma-config (json-read-from-string
+                        (with-temp-buffer
+                          (insert-file-contents (format "%s/%s" (karma-project-root) karma-config-file))
+                          (buffer-string)))))
+    karma-config))
 
 (defvar karma-start-buffer-name "*karma start*"
   "Name of the karma server output buffer.")
@@ -65,9 +77,9 @@
 (defun karma--build-runner-cmdlist (command)
   "Build the commands list for the runner."
   (remove "" (karma--flatten
-              (list karma-command (if (stringp command)
-                                      (split-string command)
-                                    command)))))
+              (list (karma-command) (if (stringp command)
+                                        (split-string command)
+                                      command)))))
 
 (defvar karma--project-root-indicators
   '("package.json" "bower.json")
@@ -91,12 +103,7 @@
       (setq default-directory project-root))))
 
 (defun karma-path-to-config-file ()
-  (let ((file (format "%s/%s" (karma-project-root) karma-config-file)))
-    (if (not (file-exists-p file))
-        (error "Couldn't find any karma config file."))
-    (with-temp-buffer
-      (insert-file-contents file)
-      (expand-file-name (buffer-string) (karma-project-root)))))
+  (karma-config-file-path))
 
 (defvar karma-buffer--buffer-name nil
   "Used to store compilation name so recompilation works as expected.")
@@ -174,9 +181,9 @@ Argument BUFFER-NAME for the compilation."
 
 (defun karma-execute (cmdlist buffer-name)
   "Run a karma command."
-  (interactive "Mkarma: ")
   (let ((old-directory default-directory))
     (karma--establish-root-directory)
+    (message default-directory)
     (karma-compilation-run (karma--build-runner-cmdlist cmdlist)
                            buffer-name)
     (cd old-directory)))
