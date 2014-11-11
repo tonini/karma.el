@@ -77,9 +77,9 @@
 (defun karma--build-runner-cmdlist (command)
   "Build the commands list for the runner."
   (remove "" (karma--flatten
-              (list (karma-command) (if (stringp command)
-                                        (split-string command)
-                                      command)))))
+              (list (if (stringp command)
+                        (split-string command)
+                      command)))))
 
 (defvar karma--project-root-indicators
   '("package.json" "bower.json")
@@ -184,7 +184,7 @@ Argument BUFFER-NAME for the compilation."
   (let ((old-directory default-directory))
     (karma--establish-root-directory)
     (message default-directory)
-    (karma-compilation-run (karma--build-runner-cmdlist cmdlist)
+    (karma-compilation-run (karma--build-runner-cmdlist (list (karma-command) cmdlist))
                            buffer-name)
     (cd old-directory)))
 

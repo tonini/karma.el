@@ -68,13 +68,13 @@
    (should-error (karma--establish-root-directory))))
 
 (ert-deftest test-build-compile-cmdlist ()
-  (should (equal (karma--build-runner-cmdlist "start")
-                 '("karma" "start")))
-  (should (equal (karma--build-runner-cmdlist '("run"))
+  (should (equal (karma--build-runner-cmdlist "karma")
+                 '("karma")))
+  (should (equal (karma--build-runner-cmdlist '("karma" "run"))
                  '("karma" "run")))
-  (should (equal (karma--build-runner-cmdlist "start --help")
+  (should (equal (karma--build-runner-cmdlist "karma start --help")
                  '("karma" "start" "--help")))
-  (should (equal (karma--build-runner-cmdlist '("run" ""))
+  (should (equal (karma--build-runner-cmdlist '("karma" "run" ""))
                  '("karma" "run"))))
 
 (provide 'karma-tests)
