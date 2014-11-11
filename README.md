@@ -11,7 +11,7 @@ Karma Test Runner Emacs Integration
 
 ```lisp
 (add-to-list 'load-path "/path/to/karma.el/")
-(require karma)
+(require 'karma)
 ```
 
 ## Contributing
