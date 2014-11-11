@@ -195,7 +195,7 @@ Key bindings:
   ;; The indicator for the mode line.
   " karma"
   :group 'karma
-  :global t)
+  :global nil)
 
 (provide 'karma)
 
