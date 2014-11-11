@@ -1,4 +1,4 @@
-;;; karma.el --- karma Test Runner Emacs Integration
+;;; karma.el --- Karma Test Runner Emacs Integration
 ;;
 ;; Filename: karma.el
 ;; Description: karma Test Runner Emacs Integration
