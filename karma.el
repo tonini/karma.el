@@ -69,9 +69,6 @@
 (defvar karma-run-buffer-name "*karma run*"
   "Name of the karma run output buffer.")
 
-(defvar karma-server-buffer-name "*karma server*"
-  "Name of the karma server output buffer.")
-
 (defun karma--flatten (alist)
   (cond ((null alist) nil)
         ((atom alist) (list alist))
