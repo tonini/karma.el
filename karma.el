@@ -25,23 +25,9 @@
 
 ;;; Commentary:
 
-;;  Installation:
-
-;;    karma.el is available on community maintained repository MELPA.
-;;
-;;    (add-to-list 'package-archives
-;;                 '("melpa" . "http://melpa.org/packages/") t)
-;;
-;;    M-x package-install [RET] karma [RET]
-
-;;  Manual Installation:
-;;
-;;    (add-to-list 'load-path "~/path/to/karma.el/")
-;;    (require 'karma)
+;;  Karma Test Runner Emacs Integration
 
 ;;  Usage:
-
-;;  Basic setup:
 
 ;;    You need to create an `.karma` file inside your project directory to inform
 ;;    Karma.el where to get the Karma config file and the Karma executable.
@@ -61,6 +47,13 @@
 (require 'compile)
 (require 'ansi-color)
 (require 'json)
+
+(defgroup karma nil
+  "Karma Test Runner Emacs Integration"
+  :prefix "karma-"
+  :group 'applications
+  :link '(url-link :tag "Github" "https://github.com/tonini/karma.el")
+  :link '(emacs-commentary-link :tag "Commentary" "karma"))
 
 (defcustom karma-config-file ".karma"
   ""
