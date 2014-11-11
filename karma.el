@@ -102,9 +102,6 @@
         (error "Couldn't find any project root")
       (setq default-directory project-root))))
 
-(defun karma-path-to-config-file ()
-  (karma-config-file-path))
-
 (defvar karma-buffer--buffer-name nil
   "Used to store compilation name so recompilation works as expected.")
 (make-variable-buffer-local 'karma-buffer--buffer-name)
@@ -161,22 +158,22 @@ Argument BUFFER-NAME for the compilation."
 
 (defun karma-start ()
   (interactive)
-  (karma-execute (list "start" (karma-path-to-config-file))
+  (karma-execute (list "start" (karma-config-file-path))
                  karma-start-buffer-name))
 
 (defun karma-start-single-run ()
   (interactive)
-  (karma-execute (list "start" (karma-path-to-config-file) "--single-run")
+  (karma-execute (list "start" (karma-config-file-path) "--single-run")
                  karma-start-buffer-name))
 
-(defun karma-start-no-single-run ()
-  (interactive)
-  (karma-execute (list "start" (karma-path-to-config-file) "--no-single-run")
+(defun karma-start-no-single-run (&optional args)
+  (interactive "P")
+  (karma-execute (list "start" (karma-config-file-path) "--no-single-run")
                  karma-start-buffer-name))
 
 (defun karma-run ()
   (interactive)
-  (karma-execute (list "run" (karma-path-to-config-file))
+  (karma-execute (list "run" (karma-config-file-path))
                  karma-run-buffer-name))
 
 (defun karma-execute (cmdlist buffer-name)
