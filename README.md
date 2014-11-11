@@ -47,7 +47,7 @@ Keybinding           | Description
 <kbd>C-c , t</kbd>   | Runs `karma-start` in the root directory of the project.
 <kbd>C-c , s s</kbd> | Runs `karma-start-single-run` in the root directory of the project.
 <kbd>C-c , n s</kbd> | Runs `karma-start-no-single-run` in the root directory of the project.
-<kbd>C-c , r</kbd>   | Runs `karma-start-run` in the root directory of the project.
+<kbd>C-c , r</kbd>   | Runs `karma-run` in the root directory of the project.
 <kbd>C-c , p</kbd>   | Pop to the `*Karma start*` buffer if exists.
 
 ## Contributing
