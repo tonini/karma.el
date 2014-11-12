@@ -175,21 +175,25 @@ Argument BUFFER-NAME for the compilation."
       (add-hook 'compilation-filter-hook 'karma-buffer--handle-compilation-once nil t))))
 
 (defun karma-start ()
+  "Run `karma start CONFIG-FILE`."
   (interactive)
   (karma-execute (list "start" (karma-config-file-path))
                  karma-start-buffer-name))
 
 (defun karma-start-single-run ()
+  "Run `karma start CONFIG-FILE --single-run`"
   (interactive)
   (karma-execute (list "start" (karma-config-file-path) "--single-run")
                  karma-start-buffer-name))
 
-(defun karma-start-no-single-run (&optional args)
-  (interactive "P")
+(defun karma-start-no-single-run ()
+  "Run `karma start CONFIG-FILE --no-single-run`"
+  (interactive)
   (karma-execute (list "start" (karma-config-file-path) "--no-single-run")
                  karma-start-buffer-name))
 
 (defun karma-run ()
+  "Run `karma run`"
   (interactive)
   (karma-execute (list "run" (karma-config-file-path))
                  karma-run-buffer-name))
