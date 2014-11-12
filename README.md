@@ -1,5 +1,6 @@
 [![License GPL 3][badge-license]](http://www.gnu.org/licenses/gpl-3.0.txt)
 [![Build Status](https://travis-ci.org/tonini/karma.el.png)](https://travis-ci.org/tonini/karma.el)
+[![MELPA](http://melpa.org/packages/karma-badge.svg)](http://melpa.org/#/karma)
 
 # karma.el
 
