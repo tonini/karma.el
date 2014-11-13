@@ -7,24 +7,70 @@
 
 > Karma Test Runner Emacs Integration
 
+***
+
+- [Installation](#installation)
+  - [ELPA](#installation-via-packageel)
+  - [Via el-get](#via-el-get)
+  - [Manual](#manual)
+- [Usage](#usage)
+  - [Basic setup](#basic-setup)
+  - [Interactice commands](#interactive-commands)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## Installation
 
-### ELPA
+### Installation via package.el
 
-Karma.el is available on community maintained repository - [MELPA](http://melpa.milkbox.net/)
+`package.el` is the built-in package manager in Emacs.
 
-Just run `M-x package-install [RET] karma [RET]` inside your emacs and you're ready to go.
+Karma.el is available on the three major community maintained repositories -
+[MELPA STABLE](melpa-stable.milkbox.net), [MELPA](http://melpa.milkbox.net) and [Marmalade](https://marmalade-repo.org/).
 
-If you're not already using ELPA, check the [emacswiki](http://www.emacswiki.org/emacs/ELPA) page to get
-familiar with it.
+You can install `Karma` with the following commnad:
+
+<kbd>M-x package-install [RET] karma [RET]</kbd>
+
+or by adding this bit of Emacs Lisp code to your Emacs initialization file
+(`.emacs` or `init.el`):
+
+```el
+(unless (package-installed-p 'karma)
+  (package-install 'karma))
+```
+
+If the installation doesn't work try refreshing the package list:
+
+<kbd>M-x package-refresh-contents [RET]</kbd>
+
+Keep in mind that MELPA packages are built automatically from
+the `master` branch, meaning bugs might creep in there from time to
+time. Never-the-less, installing from MELPA is the recommended way of
+obtaining Karma, as the `master` branch is normally quite stable and
+"stable" (tagged) builds are released somewhat infrequently.
+
+With the most recent builds of Emacs, you can pin Karma to always
+use MELPA Stable by adding this to your Emacs initialization:
+
+```el
+(add-to-list 'package-pinned-packages '(karma . "melpa-stable") t)
+```
+
+### Via el-get
+
+[el-get](https://github.com/dimitri/el-get) is another popular package manager for Emacs. If you're an el-get
+user just do <kbd>M-x el-get-install [RET] karma [RET]</kbd>.
 
 ### Manual
 
-```lisp
-(add-to-list 'load-path "/path/to/karma.el/")
+You can install Karma manually by placing it on your `load-path` and
+`require` ing it. Many people favour the folder `~/.emacs.d/vendor`.
+
+```el
+(add-to-list 'load-path "~/.emacs.d/vendor/karma.el/")
 (require 'karma)
 ```
-
 ## Usage
 
 ### Basic setup
