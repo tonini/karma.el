@@ -4,9 +4,10 @@
 ;; Description: karma Test Runner Emacs Integration
 ;; Author: Samuel Tonini
 ;; Maintainer: Samuel Tonini
-;; Version: 0.1.0
 ;; URL: http://github.com/tonini/karma.el
-;; Keywords: javascript, js, karma, testing
+;; Version: 0.2.0
+;; Package-Requires: ((pkg-info "0.4") (emacs "24"))
+;; Keywords: language, javascript, js, karma, testing
 
 ;; This file is not part of GNU Emacs.
 
@@ -198,6 +199,24 @@ Argument BUFFER-NAME for the compilation."
   (karma-execute (list "run" (karma-config-file-path))
                  karma-run-buffer-name))
 
+(defun karma--current-buffer-test-file-p ()
+  (string-match-p "\\\(_spec\\|_test\\)\.\\(js\\|coffee\\)$"
+                  (file-name-nondirectory (buffer-file-name))))
+
+(defun karma-test-file-current-buffer ()
+  "Run `karma-start-single-run' with just the current buffer file (`buffer-file-name')."
+  (interactive)
+  (if (karma--current-buffer-test-file-p)
+      (save-excursion
+        (beginning-of-buffer)
+        (replace-regexp "^describe" "ddescribe")
+        (save-buffer)
+        (karma-start-single-run)
+        (beginning-of-buffer)
+        (replace-regexp "^ddescribe" "describe"))
+    (message (format "%s is no test file."
+                     (file-name-nondirectory (buffer-file-name))))))
+
 (defun karma-execute (cmdlist buffer-name)
   "Run a karma command."
   (let ((old-directory default-directory))
@@ -220,6 +239,7 @@ Argument BUFFER-NAME for the compilation."
     (define-key map (kbd "C-c , n s") 'karma-start-no-single-run)
     (define-key map (kbd "C-c , r") 'karma-run)
     (define-key map (kbd "C-c , p") 'karma-pop-to-start-buffer)
+    (define-key map (kbd "C-c , c") 'karma-test-file-current-buffer)
     map)
   "The keymap used when `karma-mode' is active.")
 
