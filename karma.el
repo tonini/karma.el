@@ -5,7 +5,7 @@
 ;; Author: Samuel Tonini
 ;; Maintainer: Samuel Tonini
 ;; URL: http://github.com/tonini/karma.el
-;; Version: 0.2.0
+;; Version: 0.2.0-cvs
 ;; Package-Requires: ((pkg-info "0.4") (emacs "24"))
 ;; Keywords: language, javascript, js, karma, testing
 
@@ -202,20 +202,6 @@ Argument BUFFER-NAME for the compilation."
 (defun karma--current-buffer-test-file-p ()
   (string-match-p "\\\(_spec\\|_test\\)\.\\(js\\|coffee\\)$"
                   (file-name-nondirectory (buffer-file-name))))
-
-(defun karma-test-file-current-buffer ()
-  "Run `karma-start-single-run' with just the current buffer file (`buffer-file-name')."
-  (interactive)
-  (if (karma--current-buffer-test-file-p)
-      (save-excursion
-        (beginning-of-buffer)
-        (replace-regexp "^describe" "ddescribe")
-        (save-buffer)
-        (karma-start-single-run)
-        (beginning-of-buffer)
-        (replace-regexp "^ddescribe" "describe"))
-    (message (format "%s is no test file."
-                     (file-name-nondirectory (buffer-file-name))))))
 
 (defun karma-execute (cmdlist buffer-name)
   "Run a karma command."
