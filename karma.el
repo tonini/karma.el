@@ -119,7 +119,7 @@
   (let ((project-root (karma-project-root)))
     (if (not project-root)
         (error "Couldn't find any project root")
-      (setq default-directory project-root))))
+      (setq default-directory (file-name-as-directory project-root)))))
 
 (defvar karma-buffer--buffer-name nil
   "Used to store compilation name so recompilation works as expected.")
